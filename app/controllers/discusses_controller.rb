@@ -1,0 +1,2 @@
+class DiscussesController < ApplicationController
+end

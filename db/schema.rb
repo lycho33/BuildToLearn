@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
     t.string "tdopic"
     t.string "content"
     t.boolean "lesson_completed"
-    t.integer "user_id", null: false
     t.integer "student_id", null: false
     t.integer "mentor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["mentor_id"], name: "index_lessons_on_mentor_id"
     t.index ["student_id"], name: "index_lessons_on_student_id"
-    t.index ["user_id"], name: "index_lessons_on_user_id"
   end
 
   create_table "mentors", force: :cascade do |t|
@@ -62,6 +60,9 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
     t.string "email"
     t.string "username"
     t.string "password_digest"
+    t.string "status"
+    t.string "uid"
+    t.string "provider"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -70,7 +71,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
   add_foreign_key "discusses", "users"
   add_foreign_key "lessons", "mentors"
   add_foreign_key "lessons", "students"
-  add_foreign_key "lessons", "users"
   add_foreign_key "mentors", "users"
   add_foreign_key "students", "users"
 end

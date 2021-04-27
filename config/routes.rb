@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   #logout route
   delete 'logout' => 'sessions#logout'
 
+  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 
   resources :discusses
   resources :lessons

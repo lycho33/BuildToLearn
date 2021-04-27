@@ -1,6 +1,14 @@
-<h1>Home Page</h1> 
+<h1>Home Page</h1> <br>
+
 <h2>Welcome <%=@user.name %></h2>
 
+<h2>Status: <%= @user.status.capitalize %></h2><br>
+<%= form_with(model: @user, url: user_path)  do |f|%>
+    <%= f.label :status %>
+    <%= f.text_field :status %><br><br>
+    <%= f.submit "Enter" %>
+<% end %>
+
+
+
 <%= link_to 'Logout', logout_path, method: "delete" %>
-
-

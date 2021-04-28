@@ -1,24 +1,23 @@
 class SessionsController < ApplicationController
-    def home #but you don't really need it
+    def index
     end
-
-    def logout
-        session.clear
-        redirect_to login_path
-    end
-
+  
     #for login
     def create
-        user = User.find_by(username: params[:user][:username])
-
-        if user && user.authenticate(params[:user][:password])
-            flash[:message] = "Successfully signed in"
+        @user = User.find_by(username: params[:user][:username])
+        if @user && @user.authenticate(params[:user][:password])
+            flash[:message] = "Successfully logged in"
             session[:user_id] = @user.id
-            redirect_to user_path(user)
+            redirect_to user_path(@user)
         else
             flash[:message] = "Incorrect login information. Please try again."
             render :new
         end
+    end
+      
+    def logout
+        session.clear
+        redirect_to '/'
     end
 
     def omniauth
@@ -30,10 +29,11 @@ class SessionsController < ApplicationController
             u.provider = auth[:provider]
             u.password = SecureRandom.hex(10)
         end
+   
         if @user.valid?
             flash[:message] = "Successfully signed in with Google" 
             session[:user_id] = @user.id
-            redirect_to users_path ##fix the path 
+            redirect_to user_path(@user) ##fix the path 
         else
             flash[:message] = "Credential error"
             redirect_to login_path

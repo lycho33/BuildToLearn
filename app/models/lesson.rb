@@ -1,7 +1,7 @@
 class Lesson < ApplicationRecord
-  belongs_to :student
-  belongs_to :mentor
+  has_many :roles 
+  has_many :users, through: :roles
 
-  has_many :discuss
-  has_many :users, through: :discuss
+  has_many :discusses
+  has_many :users, through: :discusses
 end

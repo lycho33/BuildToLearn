@@ -9,14 +9,14 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
 
   #logout route
-  delete 'logout' => 'sessions#logout'
+  delete '/logout' => 'sessions#logout'
 
+  #omniauth
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 
   resources :discusses
   resources :lessons
-  resources :mentors
-  resources :students
-  resources :users
+  resources :roles
+  resources :users, only: [:new, :create, :show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

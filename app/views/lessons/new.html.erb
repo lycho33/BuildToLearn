@@ -1,0 +1,13 @@
+<h1>New Lesson</h1>
+
+<%= form_for(@lesson) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %><br>
+    <%= f.label :topic%>
+    <%= f.text_field :topic %><br>
+    <%= f.label :content %>
+    <%= f.text_field :content %><br>
+    
+    <%= f.submit 'Create a Lesson' %>
+<% end %>
+  

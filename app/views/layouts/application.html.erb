@@ -6,9 +6,28 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
+    <div>
+    <% if logged_in? %>
+    <br><br>
+        <%= link_to 'New Lesson', new_lesson_path %>
+        <%= link_to 'All Lessons', lessons_path %>
+        <%= link_to 'Logout', logout_path, method: :delete %>
+    <% else %>
+    <br>
+      <%= link_to 'Sign Up', signup_path%>
+      <%= link_to 'Log In', login_path%>
+      <%= link_to 'Login with Google', '/auth/google_oauth2', method: "post" %>
+    
+    <% end %>
+
+    </div>
     <%= yield %>
   </body>
 </html>

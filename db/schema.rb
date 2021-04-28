@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_182050) do
+ActiveRecord::Schema.define(version: 2021_04_27_210239) do
 
   create_table "discusses", force: :cascade do |t|
     t.text "content"
@@ -25,34 +25,24 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
 
   create_table "lessons", force: :cascade do |t|
     t.string "title"
-    t.string "tdopic"
+    t.string "topic"
     t.string "content"
     t.boolean "lesson_completed"
-    t.integer "student_id", null: false
-    t.integer "mentor_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["mentor_id"], name: "index_lessons_on_mentor_id"
-    t.index ["student_id"], name: "index_lessons_on_student_id"
   end
 
-  create_table "mentors", force: :cascade do |t|
-    t.string "name"
-    t.integer "num_of_lessons"
-    t.string "topics"
-    t.integer "user_id", null: false
+  create_table "roles", force: :cascade do |t|
+    t.string "status"
+    t.string "interested_topics"
+    t.string "progress_level"
+    t.string "lessons"
+    t.integer "user_id"
+    t.integer "lesson_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_mentors_on_user_id"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.integer "progress_level"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_students_on_user_id"
+    t.index ["lesson_id"], name: "index_roles_on_lesson_id"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,7 +50,6 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
     t.string "email"
     t.string "username"
     t.string "password_digest"
-    t.string "status"
     t.string "uid"
     t.string "provider"
     t.datetime "created_at", precision: 6, null: false
@@ -69,8 +58,4 @@ ActiveRecord::Schema.define(version: 2021_04_26_182050) do
 
   add_foreign_key "discusses", "lessons"
   add_foreign_key "discusses", "users"
-  add_foreign_key "lessons", "mentors"
-  add_foreign_key "lessons", "students"
-  add_foreign_key "mentors", "users"
-  add_foreign_key "students", "users"
 end

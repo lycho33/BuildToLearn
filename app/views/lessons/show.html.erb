@@ -1,0 +1,11 @@
+<h1>Show a lesson</h1>
+
+<label for="title">Title: </label>
+<%= @lesson.title %><br>
+<label for="topic">Topic: </label>
+<%= @lesson.topic %><br>
+<label for="content">Content: </label>
+<%= @lesson.content %><br><br>
+
+<%= link_to 'Edit a lesson', edit_lesson_path(@lesson) %><br>
+<%= link_to 'Delete Lesson', lesson_path, method: 'delete' %>

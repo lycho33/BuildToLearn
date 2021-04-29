@@ -1,0 +1,26 @@
+<h1>Choose Your Role(s)</h1>
+
+<%= form_with(model: [@lesson, @role]) do |f| %>
+    
+     <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+      <ul>
+      <% @role.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <%= f.label :status %> - <p>Please choose if you want to be a student or a mentor</p>
+    <%= f.text_field :status, value: "Student/Mentor" %><br><br>
+    <%= f.label :interested_topics%>          
+    <%= f.text_field :interested_topics %>
+    <%= f.text_field :interested_topics %>
+    <%= f.text_field :interested_topics %>
+
+    <%= f.submit 'Submit' %>
+
+<% end %>

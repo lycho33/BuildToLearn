@@ -11,8 +11,9 @@ class LessonsController < ApplicationController
 
     def create
         @lesson = current_user.lessons.build(lesson_params)
+        @lesson.user_id = current_user.id #current_user/build doesn't work as expected 
         if @lesson.save
-            redirect_to @lesson
+            redirect_to lesson_path(@lesson)
         else
             render :new 
         end

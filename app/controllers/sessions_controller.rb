@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     #for login
     def create
         @user = User.find_by(username: params[:user][:username])
+        binding.pry
         if @user && @user.authenticate(params[:user][:password])
             flash[:message] = "Successfully logged in"
             session[:user_id] = @user.id

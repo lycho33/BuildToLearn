@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    has_many :roles 
-    has_many :lessons, through: :roles
+    has_many :status
+    has_many :lessons, through: :status
 
     has_many :discusses
     has_many :lessons, through: :discusses 

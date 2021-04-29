@@ -28,21 +28,21 @@ ActiveRecord::Schema.define(version: 2021_04_27_210239) do
     t.string "topic"
     t.string "content"
     t.boolean "lesson_completed"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_lessons_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "status"
+  create_table "statuses", force: :cascade do |t|
     t.string "interested_topics"
     t.string "progress_level"
-    t.string "lessons"
     t.integer "user_id"
     t.integer "lesson_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lesson_id"], name: "index_roles_on_lesson_id"
-    t.index ["user_id"], name: "index_roles_on_user_id"
+    t.index ["lesson_id"], name: "index_statuses_on_lesson_id"
+    t.index ["user_id"], name: "index_statuses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

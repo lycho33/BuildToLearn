@@ -8,6 +8,9 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :uid
       t.string :provider 
 
+      t.string :interested_topics
+      t.string :progress_level
+
       t.timestamps
     end
   end

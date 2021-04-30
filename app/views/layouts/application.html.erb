@@ -17,7 +17,7 @@
     <% if logged_in? %>
     <br><br>
         <%= link_to 'Home', root_path%>
-        <%= link_to 'Profile', user_path(@user) %> <!-- fix this! -->
+        <%= link_to 'Profile', users_path(@user) %> <!-- fix this! -->
         <%= link_to 'New Lesson', new_lesson_path %>
         <%= link_to 'All Lessons', lessons_path %>
         <%= link_to 'Logout', logout_path, method: :delete %>

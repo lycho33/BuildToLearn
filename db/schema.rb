@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 2021_04_27_210239) do
     t.string "title"
     t.string "topic"
     t.string "content"
-    t.boolean "lesson_completed"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,8 +34,9 @@ ActiveRecord::Schema.define(version: 2021_04_27_210239) do
   end
 
   create_table "statuses", force: :cascade do |t|
-    t.string "interested_topics"
-    t.string "progress_level"
+    t.boolean "lesson_completed"
+    t.string "mentoring"
+    t.string "attending_student"
     t.integer "user_id"
     t.integer "lesson_id"
     t.datetime "created_at", precision: 6, null: false
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2021_04_27_210239) do
     t.string "password_digest"
     t.string "uid"
     t.string "provider"
+    t.string "interested_topics"
+    t.string "progress_level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

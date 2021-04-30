@@ -4,65 +4,57 @@ class StatusesController < ApplicationController
 
     def index
         if @user
-            @roles = @user.roles 
+            @statuses = @user.statuses 
         else
             flash[:message] = "This user does not exist"
-            @roles = Role.all
+            @statuses = Status.all
         end
     end
 
     def new
-        if @user
-            @role = @user.roles.build
-        else
-            @role = Role.new
-            @role.build_lesson
-        end
+        @status = Status.new
     end
 
     def create
-        @role = current_user.roles.build(role_params)
-
-        if @role.save
-            if @user
-                redirect_to user_roles_path(@user)
-            else
-                redirect_to role_path
-            end
+        @status = current_user.status.build(status_params)
+        @status.user_id = current_user.id
+        @status.lesson_id #fix this
+        if @status.save
+            redirect_to status_path(@status)
         else
-            redirect_to new_user_role_path(@user)
+            render :new
         end
     end
 
     def show
-        @role = Role.find_by(id: params[:id])
+        @status = Status.find_by(id: params[:id])
     end
 
     def edit
-        @role = Role.find_by(id: params[:id])
+        @status = Status.find_by(id: params[:id])
     end
 
     def update
-        @role = Role.find_by(id: params[:id])
-        @role.update(role_params)
+        @status = Status.find_by(id: params[:id])
+        @status.update(status_params)
 
-        if @role.valid?
-            redirect_to user_roles_path(@role)
+        if @status.valid?
+            redirect_to user_statuses_path(@status)
         else
             render :edit
         end
     end
 
     def destroy
-        @role = Role.find_by(id: params[:id])
-        @role.destroy
-        redirect_to roles_path
+        @status = Status.find_by(id: params[:id])
+        @status.destroy
+        redirect_to statuses_path
     end
 
     private
 
-    def role_params
-        params.require(:role).permit(:status, :interested_topics, :progress_level, :lesson_id, :user_id, 
+    def status_params
+        params.require(:status).permit(:interested_topics, :progress_level, :user_id, 
         user_attributes: [:name, :username])
     end
 
